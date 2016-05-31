@@ -1,0 +1,55 @@
+{% extends "base.html"  %}      
+{% load urlify %}
+
+{% block head %} {{ instance.title }} | {{ block.super }} {% endblock %}
+
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-3'>
+    {% if instance.image %}
+    <img src='{{ instance.image.url }}' class='img-responsive'/>
+    {% endif %}
+    
+<h1><b> {{ title }} </b> <small>{% if instance.draft %} <span style='color:red'> Draft </span> {% endif %}
+    {{ instance.publish }}</small> </h1>
+
+{% if instance.user.get_full_name %}
+<p><b>Author:</b> {{ instance.user.get_full_name }}</p>
+{% endif %}
+
+<hr/>
+
+<div class='row'>
+<div class='col-sm-12'>
+    
+{{ instance.content|linebreaks }} <br/>
+
+<hr/>
+<br/>
+<!-- Share buttons -->
+<p>
+
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_vkontakte_large' displayText='Vkontakte'></span>
+</p>
+
+<div id="disqus_thread"></div>
+<script>
+  
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//mantebose.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+ 
+
+</div>
+</div>
+</div>
+
+{% endblock %}
