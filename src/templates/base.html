@@ -1,6 +1,7 @@
 <!--DOCTYPE html -->
 {% load staticfiles %}
 <html>
+
 <head>
 <title> {% block head %} Mantebose's blog {% endblock %} </title>
 
@@ -17,20 +18,51 @@
 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "9d57f48b-649d-47e3-b2b4-4e04a9c4c85e", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+<link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+
+{% block head_extra %}
+{% endblock head_extra %}
+
 </head>
 
 <body>
+<div class='col-sm-6 col-sm-offset-3'>
+<header class='test'>
+	<a class="name" href="{% url 'posts:list' %}"> Mantebose's Blog </a>
+</header>
+</div>
     
 {% include 'messages_display.html' %}
 <div class=''>
 {% block content %} {% endblock %}
 </div>
 
-<!-- Latest compiled and minified JavaScript -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+
 <script id="dsq-count-scr" src="//mantebose.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".content-markdown").each(function() {
+			var content = $(this).text()
+			var markedContent = marked(content)
+			$(this).html(markedContent)
+		})
+		$(".post-detail-item img").each(function() {
+			$(this).addClass('img-responsive')
+		})
+	})
+
+</script>
 </body>
 </html>
